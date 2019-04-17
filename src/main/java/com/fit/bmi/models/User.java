@@ -15,20 +15,20 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "bmi_user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
 
     private String name;
-    private  String lastname;
+    private String lastName;
 
     private Integer age;
     private Double weight;
-
-
+    private Double height;
 }
 
 
