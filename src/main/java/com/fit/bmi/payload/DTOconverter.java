@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DTOconverter {
 
-    public User convertDTOtoUser(UserDTO userDTO){
+    public User convertDTOtoUser(UserDTO userDTO) {
         User convertedUser = new User();
         convertedUser.setHeight(userDTO.getHeight());
         convertedUser.setName(userDTO.getName());

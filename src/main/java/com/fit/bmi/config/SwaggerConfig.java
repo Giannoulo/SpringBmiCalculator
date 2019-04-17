@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
     @Bean
-    public Docket api(){
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
@@ -24,14 +24,13 @@ public class SwaggerConfig {
                 .pathMapping("/")
                 .apiInfo(metaData());
     }
+
     /**
-     *  Metadata to Swagger
-     *
-     *
+     * Metadata to Swagger
      */
 
-    private ApiInfo metaData(){
-        Contact contact = new Contact("George & Thanos","https://github.com/Giannoulo/SpringBmiCalculator","thanosloukeris@gmail.com");
+    private ApiInfo metaData() {
+        Contact contact = new Contact("George & Thanos", "https://github.com/Giannoulo/SpringBmiCalculator", "thanosloukeris@gmail.com");
         return new ApiInfoBuilder()
                 .title("Dummy project for awesome devs")
                 .description("An api to see how awesome we are!")
