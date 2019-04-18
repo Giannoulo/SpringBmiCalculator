@@ -5,6 +5,7 @@ import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * Created by George Giannoulopoulos
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "bmi_user")
-public class User {
+public class User extends AuditModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +26,6 @@ public class User {
 
     private String name;
     private String lastName;
-
     private Integer age;
     private Double weight;
     private Double height;

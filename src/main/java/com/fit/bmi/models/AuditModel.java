@@ -2,6 +2,8 @@ package com.fit.bmi.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -11,12 +13,29 @@ import java.util.Date;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
+@JsonIgnoreProperties(
+        value = {"createdAt", "updatedAt"},
+        allowGetters = true)
+@EqualsAndHashCode(callSuper = false)
+
 public abstract class AuditModel implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
+    @CreatedDate
+    private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "update_at", nullable = false)
     @LastModifiedDate
     private Date updatedAt;
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 
     public Date getUpdatedAt() {
         return updatedAt;

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BmiCalculatorImpl implements BmiCalculator {
+public class BmiCalculatorImpl {
 
     private  UserRepository userRepository;
 
@@ -19,12 +19,12 @@ public class BmiCalculatorImpl implements BmiCalculator {
         this.userRepository = userRepository;
     }
 
-    @Override
-    public double calculateBmi() {
-        return 0; //TODO
-    }
-
-    public List<User> getUsers(){
-        return userRepository.findAll();
-    }
+//    @Override
+//    public double calculateBmi() {
+//        return 0; //TODO
+//    }
+//
+//    public List<User> getUsers(){
+//        return userRepository.findAll();
+//    }
 }
