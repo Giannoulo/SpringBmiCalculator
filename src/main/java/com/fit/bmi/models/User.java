@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
  */
 
 @Entity
+@Table(name="bmi_users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "bmi_user")
 public class User {
 
     @Id
@@ -24,7 +24,7 @@ public class User {
 
 
     private String name;
-    private String lastName;
+    private String lastname;
 
     private Integer age;
     private Double weight;

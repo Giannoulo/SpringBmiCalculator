@@ -7,24 +7,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 
 @Service
-public class BmiCalculatorImpl implements BmiCalculator {
+public class BmiCalculatorImpl {
 
     private  UserRepository userRepository;
 
 
     @Autowired
     public BmiCalculatorImpl(UserRepository userRepository) {
+
         this.userRepository = userRepository;
     }
 
-    @Override
-    public double calculateBmi() {
-        return 0; //TODO
-    }
+    public double calculateBmi(Long id) {
 
-    public List<User> getUsers(){
-        return userRepository.findAll();
+        Optional<User> user = userRepository.findById(id);
+
+
+
+        User presentUser = user.get();
+
+        Integer age = presentUser.getAge();
+        Double weight = presentUser.getWeight();
+        Double height = presentUser.getHeight();
+
+        double bmi = weight/Math.pow(height,2);
+
+        return bmi;
     }
 }

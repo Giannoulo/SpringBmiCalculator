@@ -6,7 +6,9 @@ import com.fit.bmi.payload.UserDTO;
 import com.fit.bmi.repositories.UserRepository;
 import com.fit.bmi.services.BmiCalculatorImpl;
 import com.fit.bmi.services.CRUDUserServices;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,35 +17,40 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
+@AllArgsConstructor
 public class UserController {
 
     private CRUDUserServices crudUserServices;
     private BmiCalculatorImpl bmiCalculator;
     private DTOconverter dtOconverter;
 
-    public UserController(CRUDUserServices crudUserServices, BmiCalculatorImpl bmiCalculator, DTOconverter dtOconverter) {
-        this.crudUserServices = crudUserServices;
-        this.bmiCalculator = bmiCalculator;
-        this.dtOconverter = dtOconverter;
-    }
 
     @PostMapping("/register")
     public User registerUser(@Valid @RequestBody UserDTO newUserDTO) {
         return crudUserServices.registerUser(dtOconverter.convertDTOtoUser(newUserDTO));
     }
 
+
     @GetMapping("/users")
-    public List<User> getUsers() {
-        return bmiCalculator.getUsers();
+    public List<User> getUsers(){
+        return crudUserServices.getAll();
     }
 
-    //Update user by id
+
+    @PostMapping("/bmi/{userId}")
+    public Double bmi(@PathVariable Long userId){
+        return bmiCalculator.calculateBmi(userId);
+    }
+
+
+
     @PutMapping("/user/{userId}")
     public User updateUser(@PathVariable Long userId, @Valid @RequestBody UserDTO updateUserDTO) {
         return crudUserServices.updateUser(dtOconverter.convertDTOtoUser(updateUserDTO), userId);
     }
 
-    @DeleteMapping("/user/{userId}")
+    @DeleteMapping("/deleteuser/{userId}")
     void deleteEmployee(@PathVariable Long userId) {
         crudUserServices.deleteUser(userId);
     }

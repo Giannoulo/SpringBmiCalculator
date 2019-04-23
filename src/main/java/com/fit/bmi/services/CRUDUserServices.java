@@ -5,6 +5,8 @@ import com.fit.bmi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CRUDUserServices {
     private UserRepository userRepository;
@@ -18,7 +20,7 @@ public class CRUDUserServices {
         return userRepository.findById(userId).
                 map(user -> {
                     user.setName(userToBeUpdated.getName());
-                    user.setLastName(userToBeUpdated.getLastName());
+                    user.setLastname(userToBeUpdated.getLastname());
                     user.setAge(userToBeUpdated.getAge());
                     user.setWeight(userToBeUpdated.getWeight());
                     user.setHeight(userToBeUpdated.getHeight());
@@ -34,9 +36,14 @@ public class CRUDUserServices {
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
     }
+
     public User registerUser(User user){
         return userRepository.save(user);
 
+    }
+
+    public List<User> getAll(){
+        return userRepository.findAll();
     }
 
 }

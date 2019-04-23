@@ -12,7 +12,7 @@ public class DTOconverter {
         convertedUser.setName(userDTO.getName());
         convertedUser.setAge(userDTO.getAge());
         convertedUser.setWeight(userDTO.getWeight());
-        convertedUser.setLastName(userDTO.getLastName());
+        convertedUser.setLastname(userDTO.getLastname());
 
         return convertedUser;
     }
